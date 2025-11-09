@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Counter from './components/Counter';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +23,7 @@ function App() {
         age="25"
         bio="Loves hiking and photography"
       />
+      <Counter />
       <Footer />
       <div>
         <a href="https://vite.dev" target="_blank">
