@@ -1,14 +1,18 @@
-import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
-import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';               // ✅ make sure this file exists
+import RecipeDetails from './components/RecipeDetails';
 
 export default function App() {
   return (
-    <main className="container">
-      <h1>🍳 Recipe Sharing</h1>
-      <AddRecipeForm />
-      <hr />
-      <RecipeList />
-    </main>
+    <>
+      <nav style={{ padding: '1rem' }}>
+        <Link to="/">Home</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+      </Routes>
+    </>
   );
 }
