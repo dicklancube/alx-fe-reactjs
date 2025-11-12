@@ -1,4 +1,4 @@
-import { useRecipeStore } from '../store/recipeStore';
+import { useRecipeStore } from './recipeStore';
 
 export default function RecipeList() {
   const recipes = useRecipeStore((s) => s.recipes);
