@@ -2,10 +2,14 @@ import { Link } from 'react-router-dom';
 import { useRecipeStore } from '../store/recipeStore';
 
 export default function RecipeList() {
-  const recipes = useRecipeStore((s) => s.recipes);
+  const recipes = useRecipeStore((s) => s.filteredRecipes);
   const deleteRecipe = useRecipeStore((s) => s.deleteRecipe);
+  const ensure = useRecipeStore((s) => s._ensureFilteredSynced);
 
-  if (!recipes.length) return <p>No recipes yet. Add one!</p>;
+  // make sure filteredRecipes mirrors recipes on first render
+  ensure();
+
+  if (!recipes.length) return <p>No recipes match your search.</p>;
 
   return (
     <div className="recipes">
