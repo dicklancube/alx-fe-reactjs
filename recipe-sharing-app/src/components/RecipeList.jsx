@@ -1,27 +1,28 @@
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useRecipeStore } from '../store/recipeStore';
+import EditRecipeForm from './EditRecipeForm';
+import DeleteRecipeButton from './DeleteRecipeButton';
+import FavoriteToggleButton from './FavoriteToggleButton';
 
-export default function RecipeList() {
-  const recipes = useRecipeStore((s) => s.filteredRecipes);
-  const deleteRecipe = useRecipeStore((s) => s.deleteRecipe);
-  const ensure = useRecipeStore((s) => s._ensureFilteredSynced);
+export default function RecipeDetails() {
+  const { id } = useParams();
+  const recipeId = Number(id);
+  const recipe = useRecipeStore((s) => s.recipes.find((r) => r.id === recipeId));
 
-  // make sure filteredRecipes mirrors recipes on first render
-  ensure();
-
-  if (!recipes.length) return <p>No recipes match your search.</p>;
+  if (!recipe) return <p>Recipe not found.</p>;
 
   return (
-    <div className="recipes">
-      {recipes.map((r) => (
-        <article key={r.id} className="recipe-card">
-          <h3>
-            <Link to={`/recipes/${r.id}`}>{r.title}</Link>
-          </h3>
-          <p>{r.description}</p>
-          <button onClick={() => deleteRecipe(r.id)}>Delete</button>
-        </article>
-      ))}
-    </div>
+    <section>
+      <h1>{recipe.title}</h1>
+      <p>{recipe.description}</p>
+      <FavoriteToggleButton recipeId={recipeId} />
+
+      <hr />
+      <h2>Edit</h2>
+      <EditRecipeForm recipeId={recipeId} />
+      <div style={{ marginTop: '1rem' }}>
+        <DeleteRecipeButton recipeId={recipeId} />
+      </div>
+    </section>
   );
 }
