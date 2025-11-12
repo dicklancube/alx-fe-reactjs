@@ -1,0 +1,11 @@
+// src/store/recipeStore.js
+import { create } from 'zustand';
+
+export const useRecipeStore = create((set) => ({
+  recipes: [
+    { id: 1, title: 'Tomato Pasta', description: 'Pasta with garlic, basil & tomatoes.' },
+  ],
+  addRecipe: (newRecipe) =>
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  setRecipes: (recipes) => set({ recipes }),
+}));
