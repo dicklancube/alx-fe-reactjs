@@ -1,10 +1,10 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';               // ✅ make sure this file exists
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
 import RecipeDetails from './components/RecipeDetails';
 
 export default function App() {
   return (
-    <>
+    <Router>
       <nav style={{ padding: '1rem' }}>
         <Link to="/">Home</Link>
       </nav>
@@ -13,6 +13,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/recipes/:id" element={<RecipeDetails />} />
       </Routes>
-    </>
+    </Router>
   );
 }
+
